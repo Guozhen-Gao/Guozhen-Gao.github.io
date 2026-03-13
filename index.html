@@ -8,81 +8,201 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        :root { --primary-color: #224B8D; --text-color: #333; --link-color: #0366d6; --border-color: #eaeaea; }
+        /* 核心变量与全局设置，完全复刻图2的配色 */
+        :root {
+            --primary-color: #224B8D; /* 论文期刊高亮蓝 */
+            --text-color: #333;
+            --link-color: #0366d6;
+            --border-color: #eaeaea;
+        }
         
         * { box-sizing: border-box; }
-        /* 增加 top padding 防止导航栏挡住内容，尤其是双行导航时 */
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: var(--text-color); margin: 0; padding: 0; background-color: #fff; padding-top: 80px; }
-        a { color: var(--link-color); text-decoration: none; }
-        a:hover { text-decoration: underline; }
-
-        /* ===== 顶部滑动导航栏 (已适配中英双语及多选项自适应) ===== */
-        .top-nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px); border-bottom: 1px solid var(--border-color); z-index: 1000; display: flex; justify-content: center; flex-wrap: wrap; padding: 10px 20px; gap: 5px 20px; }
-        .top-nav a { margin: 5px 0; color: #555; font-weight: 500; font-size: 0.9em; transition: color 0.3s; white-space: nowrap; }
-        .top-nav a:hover { color: var(--primary-color); text-decoration: none; }
-        .top-nav a.active { color: var(--primary-color); font-weight: bold; }
-
-        /* ===== 整体布局 ===== */
-        .wrapper { display: flex; max-width: 1100px; margin: 0 auto; padding: 20px 20px 40px 20px; gap: 50px; align-items: flex-start; }
-
-        /* ===== 左侧边栏 ===== */
-        .sidebar { width: 250px; flex-shrink: 0; position: sticky; top: 100px; }
-        .avatar { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 15px auto; border: 1px solid #eee; }
-        .author-name { font-size: 1.5em; margin: 0 0 5px 0; text-align: center; }
-        .author-bio { color: #666; font-size: 0.9em; text-align: center; margin-bottom: 20px; font-style: italic; }
         
-        ul.social-links { list-style: none !important; padding: 0 !important; margin: 0 !important; font-size: 0.95em; }
-        ul.social-links li { margin-bottom: 10px !important; display: flex !important; align-items: center !important; }
-        ul.social-links i { width: 20px; text-align: center; color: #555; margin-right: 10px; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.8; /* 优化行间距，提升阅读体验 */
+            color: var(--text-color);
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+            font-size: 0.95em; /* 轻微减小整体字号，增加轻盈感 */
+        }
 
-        /* ===== 右侧主内容 ===== */
-        .main-content { flex-grow: 1; max-width: 800px; }
-        section { scroll-margin-top: 100px; margin-bottom: 40px; } 
-        
-        h1 { font-size: 1.4em; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-top: 0; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
-        
-        ul.content-list { padding-left: 20px; margin-bottom: 20px; }
-        ul.content-list li { margin-bottom: 8px; }
+        a { color: var(--link-color); text-decoration: none; transition: color 0.3s; }
+        a:hover { text-decoration: underline; color: var(--primary-color); }
 
-        /* ===== 论文/项目模块 ===== */
-        .paper-box { display: flex; gap: 20px; margin-bottom: 30px; }
-        .paper-image { width: 220px; height: 120px; flex-shrink: 0; border: 1px solid #eee; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #f9f9f9; }
-        .paper-image img { width: 100%; height: 100%; object-fit: cover; }
-        .paper-text h3 { margin: 0 0 5px 0; font-size: 1.05em; }
-        .paper-venue { font-weight: bold; color: var(--primary-color); font-size: 0.9em; margin-bottom: 5px; }
-        .paper-links { font-size: 0.9em; margin-bottom: 8px; }
+        h1, h2, h3 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+
+        /* ===== 页面整体布局：Flexbox 实现左固定，右滚动 ===== */
+        .wrapper {
+            display: flex;
+            max-width: 1200px; /* 适度放宽最大宽度 */
+            margin: 0 auto;
+            padding: 40px 20px 60px 20px;
+            gap: 60px; /* 增加左右分栏的间距 */
+            align-items: flex-start;
+        }
+
+        /* ===== 左侧边栏 (Sidebar) - 精细化重构 ===== */
+        .sidebar {
+            width: 300px; /* 放宽侧边栏宽度 */
+            flex-shrink: 0;
+            position: sticky;
+            top: 40px; /* 实现滚动时左侧固定的效果 */
+            height: fit-content;
+            background-color: #f9f9f9; /* 增加淡淡的背景色，更具层次感 */
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .avatar {
+            width: 200px; /* 增大头像尺寸，并采用圆形裁切 */
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 20px auto;
+            border: 1px solid #eee;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* 增加微妙的阴影 */
+        }
+
+        .author-name {
+            font-size: 1.6em;
+            margin: 0 0 5px 0;
+            text-align: center;
+        }
+
+        .author-bio {
+            color: #666;
+            font-size: 0.9em;
+            text-align: center;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        /* 侧边栏列表通用样式 */
+        .sidebar ul { list-style: none; padding: 0; margin: 0; font-size: 0.9em; line-height: 2; }
+        .sidebar ul li { margin-bottom: 8px; display: flex; align-items: flex-start; }
+        .sidebar ul i { width: 20px; text-align: center; color: #555; margin-right: 12px; font-size: 1.1em; margin-top: 3px;}
+
+        /* 研究兴趣列表样式 */
+        .interests h4 { font-size: 1.1em; margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
+
+        /* ===== 右侧主内容 (Main Content) ===== */
+        .main-content {
+            flex-grow: 1;
+            max-width: 800px;
+        }
+
+        .main-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h1:first-child { margin-top: 0; }
+
+        /* 新闻、荣誉、经历列表样式 */
+        ul.content-list { padding-left: 20px; margin-bottom: 25px; list-style-type: none; padding-left: 0; }
+        ul.content-list li { margin-bottom: 12px; }
+        ul.content-list li em { color: #888; font-style: normal; margin-right: 15px; display: inline-block; width: 65px; font-weight: 500; }
+
+        /* ===== 论文/项目模块 (Publications & Projects) - 核心复刻 ===== */
+        .paper-box {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 35px;
+            align-items: flex-start;
+        }
+
+        .paper-image {
+            width: 250px; /* 适度放宽项目图片宽度 */
+            height: 140px;
+            flex-shrink: 0;
+            border: 1px solid #eee;
+            overflow: hidden;
+            border-radius: 6px; /* 增加圆角 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f9f9f9;
+        }
+
+        .paper-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .paper-text h3 {
+            margin: 0 0 6px 0;
+            font-size: 1.15em;
+            color: var(--primary-color); /* 论文标题采用高亮蓝 */
+        }
+
+        .pub-authors {
+            font-size: 0.95em;
+            color: #444;
+            margin-bottom: 6px;
+        }
+
+        .paper-venue {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+
+        .paper-links { font-size: 0.9em; margin-bottom: 10px; }
+        .paper-links a { font-weight: 600; text-decoration: underline; margin-right: 10px; }
+        .paper-links a:hover { text-decoration: none; }
+
         .paper-desc { font-size: 0.9em; color: #555; text-align: justify; }
 
-        @media (max-width: 800px) {
+        /* ===== 移动端适配：变为上下排版 ===== */
+        @media (max-width: 900px) {
             .wrapper { flex-direction: column; padding: 20px; gap: 30px; }
             .sidebar { width: 100%; position: relative; top: 0; }
+            .sidebar ul li { justify-content: center; }
             .paper-box { flex-direction: column; }
             .paper-image { width: 100%; height: auto; aspect-ratio: 16/9; }
-            .top-nav { display: none; } 
         }
     </style>
 </head>
-<body id="homepage"> <nav class="top-nav">
-    <a href="#homepage" class="nav-link active">Homepage </a>
-    <a href="#about-me" class="nav-link">About Me </a>
-    <a href="#news" class="nav-link">News </a>
-    <a href="#publications" class="nav-link">Publications </a>
-    <a href="#honors" class="nav-link">Honors and Awards </a>
-    <a href="#educations" class="nav-link">Educations </a>
-    <!-- <a href="#academic-services" class="nav-link">Academic Services </a> -->
-    <a href="#experience" class="nav-link">Experience </a>
-</nav>
+<body id="homepage">
 
 <div class="wrapper">
     <aside class="sidebar">
-        <img src="profile.jpg" alt="Guozhen Gao" class="avatar" onerror="this.src='https://via.placeholder.com/180?text=Profile+Photo'">
-        <h2 class="author-name">Guozhen Gao(高国振)</h2>
-        <p class="author-bio">Striving for accuracy and rigorous research.</p>
+        <img src="profile.jpg" alt="Guozhen Gao" class="avatar" onerror="this.src='https://via.placeholder.com/200?text=Profile+Photo'">
+        <h2 class="author-name">Guozhen Gao (高国振)</h2>
+        <p class="author-bio">Undergraduate Student, Qinghai University<br>"Striving for accuracy and rigorous research."</p>
         
+        <div class="interests">
+            <h4>Research Interests</h4>
+            <ul>
+                <li><i class="fas fa-image"></i>Image Processing</li>
+                <li><i class="fas fa-brain"></i>Brain-inspired Deep Learning</li>
+                <li><i class="fas fa-share-alt"></i>Multimodal Learning</li>
+            </ul>
+        </div>
+        
+        <div style="height: 1px; background-color: #eee; margin: 25px 0;"></div>
+
         <ul class="social-links">
-            <li><i class="fas fa-map-marker-alt"></i> Qinghai, China</li>
+            <li><i class="fas fa-map-marker-alt"></i> Beijing, China</li>
             <li><i class="fas fa-envelope"></i> <a href="gzgao@qhu.edu.cn">Email</a></li>
-            <li><i class="fab fa-github"></i> <a href="https://github.com/High-ploymer">Github</a></li>
+            <li><i class="fab fa-github"></i> <a href="https://github.com/Guozhen-Gao">Github</a></li>
             <li><i class="fas fa-graduation-cap"></i> <a href="#">Google Scholar</a></li>
         </ul>
     </aside>
@@ -92,7 +212,6 @@
             <p>
                 I am currently an undergraduate student in the College of Computer Science at Qinghai University, supervised by Dr. <a href="https://zhengjun-du.github.io/">Zhengjun Du</a> and Dr. <a href="https://cs.qhu.edu.cn/jxgz/jxysz/szgk/8d633e91842f475cb382f89f82409529.htm">Song Wang</a>. 
                 I also collaborate closely with Dr. <a href="https://manyao4179.github.io/">Man Yao</a> and Dr. <a href="https://scholar.google.com/citations?user=HuTianxiang&hl=en">Hu Tianxiang</a> from the Institute of Automation, Chinese Academy of Sciences. 
-                My research interests mainly include  <strong>image processing</strong>,  <strong>multimodal learning</strong>, and  <strong>brain-inspired deep learning</strong>.
             </p>
         </section>
 
@@ -108,8 +227,6 @@
                 <li><em>2025.06</em>: 🎮 Developed and released <strong>Dog_a_Dog</strong>, an independent game project inspired by the viral tile-matching game "Sheep a Sheep".</li>
             </ul>
         </section>
-            </ul>
-        </section>
 
         <section id="publications">
             <h1>📝 Publications & Projects</h1>
@@ -120,10 +237,10 @@
                 </div>
                 <div class="paper-text">
                     <h3>DeepSight: A Deep Learning Model Interpretability and Diagnostic Analysis System</h3>
-                    <div style="font-size:0.95em; color:#444; margin-bottom:5px;"><strong>Guozhen Gao</strong>, Collaborators</div>
+                    <div class="pub-authors"><strong>Guozhen Gao</strong>, Collaborators</div>
                     <div class="paper-venue">Software Copyright (Pending Application)</div>
                     <div class="paper-links">
-                        <a href="#">PRD</a> | <a href="#">Code</a>
+                        <a href="#">PRD</a> <a href="#">Code</a>
                     </div>
                     <div class="paper-desc">
                         Developed a diagnostic analysis system focusing on rendering black-box models transparent and diagnosing structural inefficiencies, serving as a core asset for academic evaluation.
@@ -137,17 +254,18 @@
                 </div>
                 <div class="paper-text">
                     <h3>PyRetina: Modeling RGB to Event-based Data Conversion</h3>
-                    <div style="font-size:0.95em; color:#444; margin-bottom:5px;"><strong>Guozhen Gao</strong></div>
+                    <div class="pub-authors"><strong>Guozhen Gao</strong></div>
                     <div class="paper-venue">Simulation Project</div>
                     <div class="paper-links">
-                        <a href="#">GitHub</a> | <a href="#">Documentation</a>
+                        <a href="#">GitHub</a> <a href="#">Documentation</a>
                     </div>
                     <div class="paper-desc">
                         A simulation modeling the conversion of RGB images to event-based data using sparse coding and lateral inhibition principles, bridging traditional vision data and neuromorphic sensor inputs.
                     </div>
                 </div>
             </div>
-        </section>
+
+            </section>
 
         <section id="honors">
             <h1>🎖 Honors and Awards</h1>
@@ -163,58 +281,20 @@
         <section id="educations">
             <h1>📖 Educations</h1>
             <ul class="content-list" style="list-style-type: none; padding-left: 0;">
-                <li><em>2024.09 - present</em>, Undergraduate, Qinghai University.</li>
+                <li><em>2024.09 - present</em> Undergraduate Student, [Your University Name].</li>
             </ul>
         </section>
-
-        <!-- <section id="academic-services">
-            <h1>📫 Academic Services</h1>
-            <h3 style="font-size: 1.1em; margin-bottom: 10px;">Reviewer / Contributor</h3>
-            <ul class="content-list">
-                <li>Open Source Contributor: High-polymer Group, PyRetina.</li>
-            </ul>
-        </section> -->
 
         <section id="experience">
             <h1>💻 Experience</h1>
             <ul class="content-list">
-                <li><em>2025.10 - present</em>, Internship, at <a href="http://brain-ai.ia.ac.cn/">IACAS</a>, China.</li>
-                <li><em>2024.09 - present</em>, Undergraduate, at <a href="https://cs.qhu.edu.cn/">QHU-CS</a>, China.</li>
+                <li><em>2025.10 - present</em> Internship, at <a href="http://brain-ai.ia.ac.cn/">IACAS</a>, China.</li>
+                <li><em>2024.09 - present</em> Undergraduate Student, at [Your University Name], China.</li>
             </ul>
         </section>
 
     </main>
 </div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const sections = document.querySelectorAll("section");
-        const navLinks = document.querySelectorAll(".top-nav .nav-link");
-
-        window.addEventListener("scroll", () => {
-            let current = "homepage"; // 默认在顶部时为 homepage
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (scrollY >= (sectionTop - 120)) { 
-                    current = section.getAttribute("id");
-                }
-            });
-
-            // 当滚动条到达页面最底部时，强制点亮最后一个 tab
-            if ((window.innerHeight + Math.round(window.scrollY)) >= document.body.offsetHeight - 10) {
-                current = "experience";
-            }
-
-            navLinks.forEach(link => {
-                link.classList.remove("active");
-                if (link.getAttribute("href").includes(current)) {
-                    link.classList.add("active");
-                }
-            });
-        });
-    });
-</script>
 
 </body>
 </html>
