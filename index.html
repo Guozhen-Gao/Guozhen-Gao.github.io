@@ -11,18 +11,19 @@
         :root { --primary-color: #224B8D; --text-color: #333; --link-color: #0366d6; --border-color: #eaeaea; }
         
         * { box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: var(--text-color); margin: 0; padding: 0; background-color: #fff; padding-top: 60px; /* 为顶部导航留出空间 */ }
+        /* 增加 top padding 防止导航栏挡住内容，尤其是双行导航时 */
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: var(--text-color); margin: 0; padding: 0; background-color: #fff; padding-top: 80px; }
         a { color: var(--link-color); text-decoration: none; }
         a:hover { text-decoration: underline; }
 
-        /* ===== 顶部滑动导航栏 ===== */
-        .top-nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px); border-bottom: 1px solid var(--border-color); z-index: 1000; display: flex; justify-content: center; padding: 15px 0; }
-        .top-nav a { margin: 0 15px; color: #555; font-weight: 500; font-size: 0.95em; transition: color 0.3s; }
+        /* ===== 顶部滑动导航栏 (已适配中英双语及多选项自适应) ===== */
+        .top-nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px); border-bottom: 1px solid var(--border-color); z-index: 1000; display: flex; justify-content: center; flex-wrap: wrap; padding: 10px 20px; gap: 5px 20px; }
+        .top-nav a { margin: 5px 0; color: #555; font-weight: 500; font-size: 0.9em; transition: color 0.3s; white-space: nowrap; }
         .top-nav a:hover { color: var(--primary-color); text-decoration: none; }
         .top-nav a.active { color: var(--primary-color); font-weight: bold; }
 
         /* ===== 整体布局 ===== */
-        .wrapper { display: flex; max-width: 1100px; margin: 0 auto; padding: 40px 20px; gap: 50px; align-items: flex-start; }
+        .wrapper { display: flex; max-width: 1100px; margin: 0 auto; padding: 20px 20px 40px 20px; gap: 50px; align-items: flex-start; }
 
         /* ===== 左侧边栏 ===== */
         .sidebar { width: 250px; flex-shrink: 0; position: sticky; top: 100px; }
@@ -30,14 +31,13 @@
         .author-name { font-size: 1.5em; margin: 0 0 5px 0; text-align: center; }
         .author-bio { color: #666; font-size: 0.9em; text-align: center; margin-bottom: 20px; font-style: italic; }
         
-        /* 强制重置列表样式，防止你截图中的重叠 Bug */
         ul.social-links { list-style: none !important; padding: 0 !important; margin: 0 !important; font-size: 0.95em; }
         ul.social-links li { margin-bottom: 10px !important; display: flex !important; align-items: center !important; }
         ul.social-links i { width: 20px; text-align: center; color: #555; margin-right: 10px; }
 
         /* ===== 右侧主内容 ===== */
         .main-content { flex-grow: 1; max-width: 800px; }
-        section { scroll-margin-top: 80px; margin-bottom: 40px; } /* 确保锚点跳转时不会被顶部导航遮挡 */
+        section { scroll-margin-top: 100px; margin-bottom: 40px; } 
         
         h1 { font-size: 1.4em; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-top: 0; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
         
@@ -58,17 +58,19 @@
             .sidebar { width: 100%; position: relative; top: 0; }
             .paper-box { flex-direction: column; }
             .paper-image { width: 100%; height: auto; aspect-ratio: 16/9; }
-            .top-nav { display: none; } /* 手机端通常隐藏顶部横向导航 */
+            .top-nav { display: none; } 
         }
     </style>
 </head>
-<body>
-
-<nav class="top-nav">
-    <a href="#about" class="nav-link active">Homepage</a>
-    <a href="#news" class="nav-link">News</a>
-    <a href="#publications" class="nav-link">Publications</a>
-    <a href="#educations" class="nav-link">Educations</a>
+<body id="homepage"> <nav class="top-nav">
+    <a href="#homepage" class="nav-link active">Homepage 主页</a>
+    <a href="#about-me" class="nav-link">About Me 关于我</a>
+    <a href="#news" class="nav-link">News 新闻</a>
+    <a href="#publications" class="nav-link">Publications 出版物</a>
+    <a href="#honors" class="nav-link">Honors and Awards 荣誉与奖项</a>
+    <a href="#educations" class="nav-link">Educations 教育背景</a>
+    <a href="#academic-services" class="nav-link">Academic Services 学术服务</a>
+    <a href="#experience" class="nav-link">Experience 经历</a>
 </nav>
 
 <div class="wrapper">
@@ -87,7 +89,7 @@
 
     <main class="main-content">
         
-        <section id="about">
+        <section id="about-me">
             <p>
                 I am a graduate student in the Department of Computer Technology and Applications. 
                 My research interests primarily include <strong>Event-based Vision (Neuromorphic Sensors)</strong>, 
@@ -142,11 +144,35 @@
             </div>
         </section>
 
+        <section id="honors">
+            <h1>🎖 Honors and Awards</h1>
+            <ul class="content-list">
+                <li><em>2026.02</em> <strong>O-Award Standard Draft</strong>, MCM 2026 (Problem B).</li>
+                <li><em>2025</em> <strong>Placeholder Scholarship</strong>, [Your University].</li>
+            </ul>
+        </section>
+
         <section id="educations">
             <h1>📖 Educations</h1>
             <ul class="content-list" style="list-style-type: none; padding-left: 0;">
                 <li><em>2023.09 - present</em>, Graduate Student, [Your University].</li>
                 <li><em>2019.09 - 2023.06</em>, Undergraduate, [Your University].</li>
+            </ul>
+        </section>
+
+        <section id="academic-services">
+            <h1>📫 Academic Services</h1>
+            <h3 style="font-size: 1.1em; margin-bottom: 10px;">Reviewer / Contributor</h3>
+            <ul class="content-list">
+                <li>Open Source Contributor: High-polymer Group, PyRetina.</li>
+            </ul>
+        </section>
+
+        <section id="experience">
+            <h1>💻 Experience</h1>
+            <ul class="content-list">
+                <li><em>2025.10 - 2026.03</em>, Research Intern / Participant, <strong>ASC26 Supercomputer Challenge</strong>.</li>
+                <li><em>2025.09 - 2025.12</em>, Project Lead, <strong>QHU i-Lab Development</strong>.</li>
             </ul>
         </section>
 
@@ -159,15 +185,19 @@
         const navLinks = document.querySelectorAll(".top-nav .nav-link");
 
         window.addEventListener("scroll", () => {
-            let current = "";
+            let current = "homepage"; // 默认在顶部时为 homepage
+            
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                // 当滑动到该区域时，获取该区域的 ID
-                if (scrollY >= (sectionTop - 100)) {
+                if (scrollY >= (sectionTop - 120)) { 
                     current = section.getAttribute("id");
                 }
             });
+
+            // 当滚动条到达页面最底部时，强制点亮最后一个 tab
+            if ((window.innerHeight + Math.round(window.scrollY)) >= document.body.offsetHeight - 10) {
+                current = "experience";
+            }
 
             navLinks.forEach(link => {
                 link.classList.remove("active");
