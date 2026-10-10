@@ -1,297 +1,194 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guozhen Gao - Homepage</title>
-    <link rel="icon" type="image/png" href="imgs/G.png">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root { --primary-color: #224B8D; --text-color: #333; --link-color: #0366d6; --border-color: #eaeaea; }
-        
-        * { box-sizing: border-box; }
-        /* 增加 top padding 防止导航栏挡住内容，尤其是双行导航时 */
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: var(--text-color); margin: 0; padding: 0; background-color: #fff; padding-top: 80px; }
-        a { color: var(--link-color); text-decoration: none; }
-        a:hover { text-decoration: underline; }
-
-        /* ===== 顶部滑动导航栏 (已适配中英双语及多选项自适应) ===== */
-        .top-nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px); border-bottom: 1px solid var(--border-color); z-index: 1000; display: flex; justify-content: center; flex-wrap: wrap; padding: 10px 20px; gap: 5px 20px; }
-        .top-nav a { margin: 5px 0; color: #555; font-weight: 500; font-size: 0.9em; transition: color 0.3s; white-space: nowrap; }
-        .top-nav a:hover { color: var(--primary-color); text-decoration: none; }
-        .top-nav a.active { color: var(--primary-color); font-weight: bold; }
-
-        /* ===== 整体布局 ===== */
-        .wrapper { display: flex; max-width: 1100px; margin: 0 auto; padding: 20px 20px 40px 20px; gap: 50px; align-items: flex-start; }
-
-        /* ===== 左侧边栏 ===== */
-        .sidebar { width: 250px; flex-shrink: 0; position: sticky; top: 100px; }
-        .avatar { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 15px auto; border: 1px solid #eee; }
-        .author-name { font-size: 1.5em; margin: 0 0 5px 0; text-align: center; }
-        .author-bio { color: #666; font-size: 0.9em; text-align: center; margin-bottom: 20px; font-style: italic; }
-        
-        ul.social-links { list-style: none !important; padding: 0 !important; margin: 0 !important; font-size: 0.95em; }
-        ul.social-links li { margin-bottom: 10px !important; display: flex !important; align-items: center !important; }
-        ul.social-links i { width: 20px; text-align: center; color: #555; margin-right: 10px; }
-
-        /* ===== 右侧主内容 ===== */
-        .main-content { flex-grow: 1; max-width: 800px; }
-        section { scroll-margin-top: 100px; margin-bottom: 40px; } 
-        
-        h1 { font-size: 1.4em; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-top: 0; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
-        
-        ul.content-list { padding-left: 20px; margin-bottom: 20px; }
-        ul.content-list li { margin-bottom: 8px; }
-
-        /* ===== 论文/项目模块 ===== */
-        .paper-box { display: flex; gap: 20px; margin-bottom: 30px; }
-        .paper-image { width: 220px; height: 120px; flex-shrink: 0; border: 1px solid #eee; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #f9f9f9; }
-        .paper-image img { width: 100%; height: 100%; object-fit: cover; }
-        .paper-text h3 { margin: 0 0 5px 0; font-size: 1.05em; }
-        .paper-venue { font-weight: bold; color: var(--primary-color); font-size: 0.9em; margin-bottom: 5px; }
-        .paper-links { font-size: 0.9em; margin-bottom: 8px; }
-        .paper-desc { font-size: 0.9em; color: #555; text-align: justify; }
-
-        @media (max-width: 800px) {
-            .wrapper { flex-direction: column; padding: 20px; gap: 30px; }
-            .sidebar { width: 100%; position: relative; top: 0; }
-            .paper-box { flex-direction: column; }
-            .paper-image { width: 100%; height: auto; aspect-ratio: 16/9; }
-            .top-nav { display: none; } 
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8f4">
+  <meta name="description" content="Guozhen Gao — undergraduate researcher at Qinghai University and visiting researcher at Tsinghua University's PCG Lab. Research in event-based vision, multimodal learning and brain-inspired AI.">
+  <title>Guozhen Gao · Research & Other Curiosities</title>
+  <link rel="icon" href="imgs/G.png?v=c3dd3f32ffc9" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
 </head>
-<body id="homepage"> <nav class="top-nav">
-    <a href="#homepage" class="nav-link active">Homepage </a>
-    <a href="#about-me" class="nav-link">About Me </a>
-    <a href="#news" class="nav-link">News </a>
-    <a href="#publications" class="nav-link">Publications </a>
-    <a href="#honors" class="nav-link">Honors and Awards </a>
-    <a href="#educations" class="nav-link">Educations </a>
-    <a href="#academic-services" class="nav-link">Academic Services </a>
-    <a href="#experience" class="nav-link">Experience </a>
-</nav>
+<body id="top">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="progress" id="read-progress" aria-hidden="true"></div>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="Go to the homepage"><span class="brand-mark"><span>G.</span></span><span class="brand-text">Guozhen Gao<span style="color:var(--soft)"> / research</span></span></a>
+      <nav class="nav-scroll" aria-label="Primary navigation">
+        <a class="nav-link active" href="#top">Home</a><a class="nav-link" href="#news">News</a><a class="nav-link" href="#publications">Papers</a><a class="nav-link" href="#projects">Projects</a><a class="nav-link" href="#honors">Awards</a><a class="nav-link" href="#educations">Education</a><a class="nav-link" href="#experience">Experience</a><a class="nav-link" href="#academic-services">Service</a>
+      </nav>
+    </div>
+  </header>
 
-<div class="wrapper">
-    <aside class="sidebar">
-        <img src="imgs/profile.jpg" alt="Guozhen Gao" class="avatar" onerror="this.src='https://via.placeholder.com/180?text=Profile+Photo'">
-        <h2 class="author-name">Guozhen Gao(高国振)</h2>
-        <p class="author-bio">Striving for accuracy and rigorous research.</p>
-        
-        <ul class="social-links">
-            <li><i class="fas fa-map-marker-alt"></i> Qinghai, China</li>
-            <li><i class="fas fa-envelope"></i> <a href="mailot:gzgao@qhu.edu.cn">Email</a></li>
-            <li><i class="fab fa-github"></i> <a href="https://github.com/High-ploymer">Github</a></li>
-            <li><i class="fas fa-graduation-cap"></i> <a href="#">Google Scholar</a></li>
-        </ul>
+  <div class="layout">
+    <aside class="sidebar" aria-label="Profile">
+      <div class="profile-card">
+        <div class="portrait-frame"><div class="portrait-inner"><img width="400" height="400" fetchpriority="high" src="imgs/profile.jpg" alt="Portrait of Guozhen Gao" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="portrait-fallback" style="display:none">GG</span></div></div>
+        <h2 class="profile-name">Guozhen Gao</h2>
+        <span class="role-chip"><span class="dot"></span>Undergraduate Researcher</span>
+        <p class="profile-tagline">Striving for accuracy and rigorous research. Always curious.</p>
+        <div class="profile-divider"></div>
+        <div class="contact-links contact-tiles">
+          <span class="contact-link" title="Qinghai &amp; Beijing, China" aria-label="Location: Qinghai and Beijing, China"><span class="mini-icon" aria-hidden="true">⌖</span><span class="contact-tile-label">Qinghai &amp; Beijing, China</span></span>
+          <a class="contact-link" href="mailto:gzgao@qhu.edu.cn" title="gzgao@qhu.edu.cn" aria-label="Email: gzgao@qhu.edu.cn"><span class="mini-icon" aria-hidden="true">@</span><span class="contact-tile-label">gzgao@qhu.edu.cn</span></a>
+          <a class="contact-link" href="https://github.com/High-ploymer" target="_blank" rel="noopener noreferrer" title="GitHub / High-ploymer" aria-label="GitHub: High-ploymer (opens in a new tab)"><span class="mini-icon" aria-hidden="true">&lt;/&gt;</span><span class="contact-tile-label">GitHub / High-ploymer ↗</span></a>
+        </div>
+      </div>
+      <p class="sidebar-footnote">Pixels, spikes, and new perspectives.</p>
     </aside>
 
-    <main class="main-content">
-        <section id="about-me">
-            <p>
-                I am currently an undergraduate student in the College of Computer Science at Qinghai University, supervised by Dr. <a href="https://zhengjun-du.github.io/">Zhengjun Du</a> and Dr. <a href="https://cs.qhu.edu.cn/jxgz/jxysz/szgk/8d633e91842f475cb382f89f82409529.htm">Song Wang</a>. 
-                I also collaborate closely with Dr. <a href="https://manyao4179.github.io/">Man Yao</a> and Dr. <a href="https://scholar.google.com/citations?user=HuTianxiang&hl=en">Tianxiang Hu</a> from the Institute of Automation, Chinese Academy of Sciences. 
-                My research interests mainly include  <strong>image processing</strong>,  <strong>multimodal learning</strong>, and  <strong>brain-inspired deep learning</strong>.
-            </p>
-        </section>
+    <main class="content" id="main-content" tabindex="-1">
+      <div class="hero reveal" aria-label="Introduction">
+        <div class="hero-copy">
+          <div class="hero-kicker">Guozhen Gao / Research &amp; Engineering</div>
+          <h1>From pixels<br>to <em>intelligence.</em></h1>
+          <p class="hero-desc">I am Guozhen Gao, a computer science undergraduate at Qinghai University. I explore event-based vision, multimodal learning, brain-inspired AI, and embodied intelligence — connecting visual perception with intelligent action.</p>
+          <p class="hero-toolkit"><span>Engineering toolkit</span> Python · C/C++ · PyTorch · CUDA &amp; parallel computing</p>
+          <div class="hero-actions"><a href="#publications" class="hero-btn primary">Explore research <span aria-hidden="true">↗</span></a><a href="mailto:gzgao@qhu.edu.cn" class="hero-btn">Get in touch <span aria-hidden="true">↗</span></a></div>
+        </div>
+      </div>
+      <div class="profile-highlights reveal" aria-label="Academic background and current roles">
+        <a class="highlight" href="#educations"><span class="highlight-label">01 / Education</span><strong>Computer Science &amp; Technology</strong><span>Qinghai University · 绿色算力创新班</span><span class="highlight-arrow" aria-hidden="true">↗</span></a>
+        <a class="highlight" href="#educations"><span class="highlight-label">02 / Academic record</span><strong>GPA 4.2<span class="metric-denominator"> / 4.5</span> <span class="metric-divider">·</span> Rank 1<span class="metric-denominator"> / 34</span></strong><span>Undergraduate studies · Since 2024 , expected 2028</span><span class="highlight-arrow" aria-hidden="true">↗</span></a>
+        <a class="highlight" href="#experience"><span class="highlight-label">03 / Research experience</span><strong>PCG Lab &amp; CASIA</strong><span>Visiting research · Research internship</span><span class="highlight-arrow" aria-hidden="true">↗</span></a>
+        <a class="highlight" href="#experience"><span class="highlight-label">04 / Industry experience</span><strong>Embodied Intelligence Engineer</strong><span>北京千诀科技有限公司 · Internship</span><span class="highlight-arrow" aria-hidden="true">↗</span></a>
+      </div>
 
-        <section id="news">
-            <h1>🔥 News</h1>
-            <ul class="content-list">
-                <li><em>2026.05</em>: 🥈 Won the <strong>National Second Prize</strong> in the <strong>2026 MCM</strong> (Problem B) with the "Archimedes Architecture" report, utilizing NSGA-II and Monte Carlo simulations. <strong>(Leader)</strong></li>
-                <li><em>2026.05</em>: 🏆 Awarded <strong>International Second Prize</strong> at the <strong>ASC26 Student Supercomputer Challenge</strong>, focusing on the inference performance optimization of the UnifoLM-WMA-0 Embodied World Model on NVIDIA A800 GPUs.</li>
-                <li><em>2026.04</em>: 🎉 The provincial-level research project <strong>"Research and Application of Intelligent Content Enhancement Technology for News Media"</strong>, funded by the Central Government Guides Local Science and Technology Development Funds of Qinghai Province, has been officially approved. I am honored to participate in this project.</li>
-                <li><em>2026.03</em>: 🌟 Ranked <strong>1st in the college</strong> to lead the university-level key research project <strong>"Research on Spatiotemporal Modeling and Multimodal Fusion Based on Event Data"</strong> as the Independent Principal Investigator (PI).</li>
-                <li><em>2026.03</em>: 📜 Secured a <strong>Software Copyright</strong> for <em>DeepSight</em>, a deep learning model interpretability and diagnostic analysis system oriented towards computer vision.</li>
-                <li><em>2025.12</em>: 💻 Designed and open-sourced a suite of <strong>five independent projects</strong> (including <em>QHU i-Lab</em>, <em>PyRetina</em>, and <em>ArchVento-AI-Ops-Pod</em>), spanning neuromorphic vision simulation to system architectures.</li>
-                <li><em>2025.10</em>: 🥈 Awarded <strong>National Second Prize</strong> in the Contemporary Undergraduate Mathematical Contest in Modeling (<strong>CUMCM</strong>). <strong>(Leader)</strong></li>
-                <li><em>2025.09</em>: 🥉 Awarded <strong>National Third Prize</strong> in the <strong>Baidu Astar Programming Contest</strong>.</li>
-                <li><em>2025.06</em>: 🎮 Developed and released <strong>Dog_a_Dog</strong>, an independent game project inspired by the viral tile-matching game "Sheep a Sheep".</li>
-            </ul>
-        </section>
-            </ul>
-        </section>
+      <section id="news" class="reveal">
+        <div class="section-heading"><span class="section-icon">01</span><h2 class="section-title">Latest News</h2><span class="section-line"></span></div>
+        <div class="timeline">
+          <div class="news-item fresh"><time datetime="2026-09" class="news-date">2026.09</time><div class="news-content">Joined the <strong>PCG Lab at Tsinghua University</strong> as a visiting student researcher, under the guidance of <strong>Dr. Junliang Xing</strong>.<span class="new-tag">NEW</span></div></div>
+          <div class="news-item fresh"><time datetime="2026-09" class="news-date">2026.09</time><div class="news-content">Submitted <strong>“Beyond OOD: Evaluating Large Foundation Models via Out-of-World Distribution”</strong> to <strong>ICLR</strong> as a co-author.<span class="new-tag">NEW</span></div></div>
+          <div class="news-item fresh"><time datetime="2026-08" class="news-date">2026.08</time><div class="news-content">Submitted <strong>“Motion-Aware Event-Based Object Detection”</strong> to <strong>AAAI</strong> as a co-author.<span class="new-tag">NEW</span></div></div>
+          <div class="news-item"><time datetime="2026-05" class="news-date">2026.05</time><div class="news-content">Won the <strong>National Second Prize</strong> in the <strong>2026 MCM</strong> (Problem B) with the “Archimedes Architecture” report, using NSGA-II and Monte Carlo simulations. <strong>(Leader)</strong></div></div>
+          <div class="news-item"><time datetime="2026-05" class="news-date">2026.05</time><div class="news-content">Awarded <strong>International Second Prize</strong> at the <strong>ASC26 Student Supercomputer Challenge</strong>, optimizing UnifoLM-WMA-0 embodied world model inference on NVIDIA A800 GPUs.</div></div>
+        </div>
+        <details class="older-news"><summary>View earlier updates</summary><div class="timeline">
+          <div class="news-item"><time datetime="2026-04" class="news-date">2026.04</time><div class="news-content">The provincial research project <strong>“Research and Application of Intelligent Content Enhancement Technology for News Media”</strong>, funded by Qinghai Province's Central Government-guided local science and technology development funds, was approved; I participate in this project.</div></div>
+          <div class="news-item"><time datetime="2026-03" class="news-date">2026.03</time><div class="news-content">Ranked <strong>1st in the college</strong> to lead the university-level key research project <strong>“Research on Spatiotemporal Modeling and Multimodal Fusion Based on Event Data”</strong> as independent Principal Investigator (PI).</div></div>
+          <div class="news-item"><time datetime="2026-03" class="news-date">2026.03</time><div class="news-content">Secured a <strong>software copyright</strong> for <strong>DeepSight</strong>, a computer-vision model interpretability and diagnostic analysis system.</div></div>
+          <div class="news-item"><time datetime="2025-12" class="news-date">2025.12</time><div class="news-content">Designed and open-sourced a suite of <strong>five independent projects</strong>, including QHU i-Lab, PyRetina and ArchVento-AI-Ops-Pod.</div></div>
+          <div class="news-item"><time datetime="2025-10" class="news-date">2025.10</time><div class="news-content">Awarded <strong>National Second Prize</strong> in the Contemporary Undergraduate Mathematical Contest in Modeling (<strong>CUMCM</strong>). <strong>(Leader)</strong></div></div>
+          <div class="news-item"><time datetime="2025-09" class="news-date">2025.09</time><div class="news-content">Awarded <strong>National Third Prize</strong> in the <strong>Baidu Astar Programming Contest</strong>.</div></div>
+          <div class="news-item"><time datetime="2025-06" class="news-date">2025.06</time><div class="news-content">Developed and released <strong>Dog_a_dog</strong>, an independent tile-matching puzzle game inspired by “Sheep a Sheep”.</div></div>
+        </div></details>
+      </section>
 
-        <section id="publications">
-            <h1>📝 Publications & Projects</h1>
+      <section id="publications" class="reveal">
+        <div class="section-heading"><span class="section-icon">02</span><h2 class="section-title">Research Papers</h2><span class="section-line"></span></div>
+        <article class="paper-card">
+          <div class="paper-art"><div class="art-label">EVENT · VISION</div><div class="art-main">Motion<br>Aware.</div><div class="art-foot">CONFERENCE MANUSCRIPT / 2026</div></div>
+          <div><div class="paper-meta"><span class="badge">AAAI · Submitted</span><span class="badge ghost">Aug 2026</span></div><h3 class="paper-title">Motion-Aware Event-Based Object Detection</h3><p class="paper-blurb">Co-author. A manuscript on event-based object detection submitted to AAAI in August 2026.</p><span class="submission-notice">Submission status — not an acceptance announcement.</span></div>
+        </article>
+        <article class="paper-card">
+          <div class="paper-art ood"><div class="art-label">FOUNDATION · MODELS</div><div class="art-main">Beyond<br>OOD.</div><div class="art-foot">CONFERENCE MANUSCRIPT / 2026</div></div>
+          <div><div class="paper-meta"><span class="badge teal">ICLR · Submitted</span><span class="badge ghost">Sep 2026</span></div><h3 class="paper-title">Beyond OOD: Evaluating Large Foundation Models via Out-of-World Distribution</h3><p class="paper-blurb">Co-author. A manuscript on foundation-model evaluation beyond conventional out-of-distribution settings, submitted to ICLR in September 2026.</p><span class="submission-notice">Submission status — not an acceptance announcement.</span></div>
+        </article>
+      </section>
 
-            <div class="paper-box">
-                <div class="paper-image">
-                    <img src="imgs/deepsight.png" alt="DeepSight Diagram" onerror="this.style.display='none'; this.parentNode.innerHTML='[DeepSight Image]';">
-                </div>
-                <div class="paper-text">
-                    <h3>DeepSight: A Deep Learning Model Interpretability and Diagnostic Analysis System</h3>
-                    <div style="font-size:0.95em; color:#444; margin-bottom:5px;"><strong>Guozhen Gao</strong></div>
-                    <div class="paper-venue">Software Copyright</div>
-                    <div class="paper-links">
-                        <a href="#">PRD</a> | <a href="#">Code</a>
-                    </div>
-                    <div class="paper-desc">
-                        A diagnostic analysis system oriented towards computer vision, focusing on rendering black-box models transparent and diagnosing structural inefficiencies, serving as a core asset for academic evaluation.
-                    </div>
-                </div>
-            </div>
+      <section id="projects" class="reveal">
+        <div class="section-heading"><span class="section-icon">03</span><h2 class="section-title">Selected Projects</h2><span class="section-line"></span></div>
+        <div class="filter-row" role="group" aria-label="Filter projects">
+          <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">All projects</button>
+          <button class="filter-btn" type="button" data-filter="vision" aria-pressed="false">AI &amp; Vision</button>
+          <button class="filter-btn" type="button" data-filter="software" aria-pressed="false">Software</button>
+          <button class="filter-btn" type="button" data-filter="creative" aria-pressed="false">Creative</button>
+        </div>
+        <div class="project-grid" id="project-grid">
+          <article class="project-card" data-category="vision software"><div class="project-media"><img src="imgs/deepsight.png" alt="DeepSight system diagram" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="project-fallback">DeepSight / AI</span></div><div class="project-content"><div class="paper-meta"><span class="badge">Software Copyright</span></div><h3>DeepSight: Model Interpretability &amp; Diagnostics</h3><p>A computer-vision model interpretation and diagnostic system, designed to make black-box models more transparent and reveal structural inefficiencies.</p><div class="project-bottom"><span class="submission-notice">Guozhen Gao · 2026</span></div></div></article>
+          <article class="project-card" data-category="vision software"><div class="project-media"><img src="imgs/pyretina.png" alt="PyRetina simulator output" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="project-fallback">PyRetina / DVS</span></div><div class="project-content"><div class="paper-meta"><span class="badge teal">Open Source</span></div><h3>PyRetina: Neuromorphic Vision Simulator</h3><p>An educational DVS simulation and spatiotemporal analysis system, converting RGB imagery into event data through brain-inspired mechanisms.</p><div class="project-bottom"><a href="https://github.com/High-ploymer/PyRetina" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></div></article>
+          <article class="project-card" data-category="software"><div class="project-media"><img src="imgs/qhu_ilab.png" alt="QHU-i-Lab appointment platform" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="project-fallback">QHU i-Lab</span></div><div class="project-content"><div class="paper-meta"><span class="badge teal">Open Source</span></div><h3>QHU-i-Lab: Smart Laboratory Platform</h3><p>A full-stack laboratory appointment and resource management system for Qinghai University, built with Python, SQL and HTML.</p><div class="project-bottom"><a href="https://github.com/High-ploymer/QHU-i-Lab" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></div></article>
+          <article class="project-card" data-category="creative software"><div class="project-media"><img src="imgs/merry_christmas_tree.png" alt="Interactive Christmas tree project" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="project-fallback">Christmas Tree ✳</span></div><div class="project-content"><div class="paper-meta"><span class="badge teal">Open Source</span></div><h3>Merry_Christmas_Tree: Interactive Album</h3><p>A TypeScript front-end experience featuring a dynamic Christmas tree, memory album and a virtual gift box.</p><div class="project-bottom"><a href="https://github.com/High-ploymer/Merry_Christmas_Tree" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></div></article>
+          <article class="project-card" data-category="software"><div class="project-media"><img src="imgs/archvento.png" alt="ArchVento AI operations platform" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="project-fallback">ArchVento</span></div><div class="project-content"><div class="paper-meta"><span class="badge teal">Open Source</span></div><h3>ArchVento-AI-Ops-Pod</h3><p>A portable high-performance AI operations platform based on Arch Linux and Ventoy, optimizing deployment workflows.</p><div class="project-bottom"><a href="https://github.com/High-ploymer/ArchVento-AI-Ops-Pod" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></div></article>
+          <article class="project-card" data-category="creative software"><div class="project-media"><img src="imgs/dog_a_dog.png" alt="Dog_a_dog puzzle game" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="project-fallback">Dog_a_dog</span></div><div class="project-content"><div class="paper-meta"><span class="badge teal">Open Source Game</span></div><h3>Dog_a_dog: Tile-Matching Puzzle</h3><p>An independent C++ game built with EasyX graphics, implementing tile-matching mechanics inspired by casual puzzle games.</p><div class="project-bottom"><a href="https://github.com/High-ploymer/Dog_a_dog" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></div></article>
+        </div>
+      </section>
 
-            <div class="paper-box">
-                <div class="paper-image">
-                    <img src="imgs/pyretina.png" alt="PyRetina Output" onerror="this.style.display='none'; this.parentNode.innerHTML='[PyRetina Image]';">
-                </div>
-                <div class="paper-text">
-                    <h3>PyRetina: Neuromorphic Vision Simulation and Spatiotemporal Data Analysis System</h3>
-                    <div style="font-size:0.95em; color:#444; margin-bottom:5px;"><strong>Guozhen Gao</strong></div>
-                    <div class="paper-venue">Open Source Project</div>
-                    <div class="paper-links">
-                        <a href="https://github.com/High-ploymer/PyRetina">GitHub</a> | <a href="#">Documentation</a>
-                    </div>
-                    <div class="paper-desc">
-                        An educational and analytical simulation system for Dynamic Vision Sensors (DVS), modeling the conversion of RGB images to event-based data using brain-inspired mechanisms.
-                    </div>
-                </div>
-            </div>
+      <section id="honors" class="reveal">
+        <div class="section-heading"><span class="section-icon">04</span><h2 class="section-title">Honors &amp; Awards</h2><span class="section-line"></span></div>
+        <div class="awards-grid">
+          <div class="award"><span class="award-year">2024 – 2025</span><div class="award-name">“Good Reading” Tsinghua Fund Scholarship <span class="award-detail">· Highly selective</span></div></div>
+          <div class="award"><span class="award-year">2024 – 2025</span><div class="award-name">BYD Corporate Scholarship <span class="award-detail">· Comprehensive achievement</span></div></div>
+          <div class="award"><span class="award-year">2024 – 2025</span><div class="award-name">Campus Talent Scholarship</div></div>
+          <div class="award"><span class="award-year">2024 – 2025</span><div class="award-name">Outstanding Student Scholarship</div></div>
+          <div class="award"><span class="award-year">2024 – 2025</span><div class="award-name">University-level “Five-Good” Student <span class="award-detail">· Comprehensive student honor</span></div></div>
+        </div>
+      </section>
 
-            <div class="paper-box">
-                <div class="paper-image">
-                    <img src="imgs/qhu_ilab.png" alt="QHU-i-Lab" onerror="this.style.display='none'; this.parentNode.innerHTML='[QHU-i-Lab Image]';">
-                </div>
-                <div class="paper-text">
-                    <h3>QHU-i-Lab: Smart Laboratory Appointment Platform</h3>
-                    <div style="font-size:0.95em; color:#444; margin-bottom:5px;"><strong>Guozhen Gao</strong></div>
-                    <div class="paper-venue">Open Source Project</div>
-                    <div class="paper-links">
-                        <a href="https://github.com/High-ploymer/QHU-i-Lab">GitHub</a>
-                    </div>
-                    <div class="paper-desc">
-                        A full-stack smart appointment system developed for Qinghai University using Python, SQL, and HTML, designed to streamline laboratory resource allocation and management.
-                    </div>
-                </div>
-            </div>
+      <section id="educations" class="reveal">
+        <div class="section-heading"><span class="section-icon">05</span><h2 class="section-title">Education</h2><span class="section-line"></span></div>
+        <div class="journey-list"><div class="journey"><span class="journey-date">Sep 2024 – Present</span><div><div class="journey-role">Undergraduate · Qinghai University</div><div class="journey-desc">Computer Science &amp; Technology · 绿色算力创新班.<br><strong>GPA: 4.2 / 4.5 · Rank: 1 / 34</strong><br>English: CET-6 494 · Reading 218.</div></div></div></div>
+      </section>
 
-            <div class="paper-box">
-                <div class="paper-image">
-                    <img src="imgs/merry_christmas_tree.png" alt="Merry Christmas Tree Project" onerror="this.style.display='none'; this.parentNode.innerHTML='[Christmas Tree Image]';">
-                </div>
-                <div class="paper-text">
-                    <h3>Merry_Christmas_Tree: Interactive Holiday Album and Virtual Gift Box</h3>
-                    <div style="font-size:0.95em; color:#444; margin-bottom:5px;"><strong>Guozhen Gao</strong></div>
-                    <div class="paper-venue">Open Source Project</div>
-                    <div class="paper-links">
-                        <a href="https://github.com/High-ploymer/Merry_Christmas_Tree">GitHub</a>
-                    </div>
-                    <div class="paper-desc">
-                        A front-end interactive web application developed with TypeScript. The project features a dynamic Christmas tree, a memorial photo album, and a virtual envelope gift box, demonstrating proficiency in modern web animations and UI design.
-                    </div>
-                </div>
-            </div>
-
-            <div class="paper-box">
-                <div class="paper-image">
-                    <img src="imgs/archvento.png" alt="ArchVento-AI-Ops-Pod" onerror="this.style.display='none'; this.parentNode.innerHTML='[ArchVento Image]';">
-                </div>
-                <div class="paper-text">
-                    <h3>ArchVento-AI-Ops-Pod: Portable High-Performance AI Operations Platform</h3>
-                    <div style="font-size:0.95em; color:#444; margin-bottom:5px;"><strong>Guozhen Gao</strong></div>
-                    <div class="paper-venue">Open Source Project</div>
-                    <div class="paper-links">
-                        <a href="https://github.com/High-ploymer/ArchVento-AI-Ops-Pod">GitHub</a>
-                    </div>
-                    <div class="paper-desc">
-                        Designed and implemented a portable, high-performance AI operations and maintenance platform based on Arch Linux and Ventoy technologies, optimizing deployment workflows.
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="paper-box">
-                <div class="paper-image">
-                    <img src="imgs/dog_a_dog.png" alt="Dog_a_dog Game" onerror="this.style.display='none'; this.parentNode.innerHTML='[Dog_a_Dog Image]';">
-                </div>
-                <div class="paper-text">
-                    <h3>Dog_a_dog: Tile-Matching Puzzle Game</h3>
-                    <div style="font-size:0.95em; color:#444; margin-bottom:5px;"><strong>Guozhen Gao</strong></div>
-                    <div class="paper-venue">Open Source Game Project</div>
-                    <div class="paper-links">
-                        <a href="https://github.com/High-ploymer/Dog_a_dog">GitHub</a>
-                    </div>
-                    <div class="paper-desc">
-                        An independent game development project built with C++ and the EasyX graphics library, implementing complex tile-matching logic inspired by popular casual games.
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-        <section id="honors">
-            <h1>🎖 Honors and Awards</h1>
-            <ul class="content-list">
-                <li><em>2024 - 2025</em> <strong>"Good Reading" Tsinghua Fund Scholarship</strong> (Highly Selective).</li>
-                <li><em>2024 - 2025</em> <strong>BYD Corporate Scholarship</strong> (Recognizing outstanding comprehensive abilities).</li>
-                <li><em>2024 - 2025</em> <strong>Campus Talent Scholarship</strong>.</li>
-                <li><em>2024 - 2025</em> <strong>Outstanding Student Scholarship</strong>.</li>
-                <li><em>2024 - 2025</em> <strong>University-level "Five-Good" Student</strong> (Highest comprehensive honor for students).</li>
-            </ul>
-        </section>
-
-        <section id="educations">
-            <h1>📖 Educations</h1>
-            <ul class="content-list" style="list-style-type: none; padding-left: 0;">
-                <li><em>2024.09 - present</em>, Undergraduate, Qinghai University.</li>
-            </ul>
-        </section>
-
-        <section id="academic-services">
-            <h1>📫 Academic Services</h1>
-            <h3 style="font-size: 1.1em; margin-bottom: 10px;">Reviewer</h3>
-            <p>Conference:</p>
-            <ul>
-                <li>ACM International Conference on Multimedia(ACM MM) 2026</li>
-            </ul>
-        </section>
-        
-
-        <section id="experience">
-            <h1>💻 Experience</h1>
-            <ul class="content-list">
-                <li><em>2026.01 - 2026.12</em> Project Member, Provincial Research Project: <em>Research and Application of Intelligent Content Enhancement Technology for News Media</em>, Qinghai University.</li>
-                <li><em>2026.01 - 2026.12</em> Principal Investigator (PI), University-level Key Project: <em>Research on Spatiotemporal Modeling and Multimodal Fusion Based on Event Data</em>.</li>
-                <li><em>2025.10 - present</em>, Internship, at <a href="http://brain-ai.ia.ac.cn/">IACAS</a>, China.</li>
-                <li><em>2024.09 - present</em>, Undergraduate, at <a href="https://cs.qhu.edu.cn/">QHU-CS</a>, China.</li>
-            </ul>
-        </section>
-
-    </main>
+      <section class="reveal" id="experience">
+<div class="section-heading"><span class="section-icon">06</span><h2 class="section-title">Research Experience</h2><span class="section-line"></span></div>
+<div class="journey-list">
+<div class="journey"><span class="journey-date">Sep 2026 – Present</span><div><h3 class="journey-role">Visiting Student Researcher</h3><div class="journey-affiliation"><a href="https://pi.cs.tsinghua.edu.cn/" rel="noopener noreferrer" target="_blank">PCG Lab</a>, Tsinghua University</div><div class="journey-desc">Department of Computer Science and Technology. Research under the guidance of <a href="https://pi.cs.tsinghua.edu.cn/lab/people/jlxing/en/" rel="noopener noreferrer" target="_blank">Dr. Junliang Xing</a>.</div></div></div>
+<div class="journey"><span class="journey-date">Mar 2026 – Present</span><div><h3 class="journey-role">Embodied Intelligence Engineer (Intern)</h3><div class="journey-affiliation">北京千诀科技有限公司</div><div class="journey-desc">A company affiliated with the Department of Automation, Tsinghua University.<ul class="experience-details"><li><span class="experience-topic">Embodied perception</span><p>Developed <strong>21-keypoint hand pose estimation</strong> for embodied visual perception under occlusion, motion blur, and background interference, including model training, optimization, and evaluation.</p></li><li><span class="experience-topic">Beyond OOD</span><p>Developed an <strong>Out-of-World Distribution (OOWD)</strong> evaluation framework for large foundation models, introducing <strong>counter-world semantic interventions</strong> to assess cross-distribution rule transfer and deriving <strong>OOWDAlign</strong> to improve domain generalization through <strong>cross-domain update alignment</strong>.</p></li></ul></div></div></div>
+<div class="journey"><span class="journey-date">Jan – Dec 2026</span><div><h3 class="journey-role">Core Project Member</h3><div class="journey-affiliation">Provincial Research Project</div><div class="journey-desc">Research and Application of Intelligent Content Enhancement Technology for News Media · Qinghai University.<ul class="experience-details"><li><span class="experience-topic">Historical-image colorization</span><p>Contributed to historical-image colorization, using reference images for <strong>semantic alignment and color transfer</strong>; worked on feature extraction, cross-image matching, and model evaluation.</p></li></ul><p class="journey-funding">Provincial key project · Funding: CNY 470,000.</p></div></div></div>
+<div class="journey"><span class="journey-date">Jan – Dec 2026</span><div><h3 class="journey-role">Principal Investigator (PI)</h3><div class="journey-affiliation">University-level Key Project</div><div class="journey-desc">Research on Spatiotemporal Modeling and Multimodal Fusion Based on Event Data.<ul class="experience-details"><li><span class="experience-topic">Event-based multimodal modeling</span><p><strong>Led technical planning and algorithm design</strong> for hierarchical event modeling, <strong>cross-modal fusion</strong>, and high-frequency inference; implemented models and organized experiments.</p></li></ul><p class="journey-funding">University-level key SRT project · Funding: CNY 10,000.</p></div></div></div>
+<div class="journey"><span class="journey-date">Oct 2025 – Present</span><div><h3 class="journey-role">Research Internship</h3><div class="journey-affiliation"><a href="http://brain-ai.ia.ac.cn/" rel="noopener noreferrer" target="_blank">Institute of Automation, CAS</a></div><div class="journey-desc">Research under the guidance of <a href="https://www.ia.cas.cn/rcdw/jcqn/202404/t20240422_7130910.html" rel="noopener noreferrer" target="_blank">Dr. Guoqi Li</a> and <a href="https://brain-ai.ia.ac.cn/yjdw/zlgcs/202412/t20241209_266966.html" rel="noopener noreferrer" target="_blank">Dr. Man Yao</a>. I also collaborate with Dr. <a href="https://scholar.google.com/citations?user=HuTianxiang&amp;hl=en" rel="noopener noreferrer" target="_blank">Tianxiang Hu</a>.<ul class="experience-details"><li><span class="experience-topic">Spatiotemporal modeling</span><p>Studied spatiotemporal modeling and multimodal fusion for event-camera data, with <strong>efficient linear-attention models</strong> for sparse streams and dynamic motion.</p></li><li><span class="experience-topic">Cross-modal generalization</span><p>Investigated RGB–event <strong>cross-modal fusion</strong> and <strong>frequency generalization</strong> under asynchronous observations and mismatched sampling rates.</p></li></ul></div></div></div>
+<div class="journey"><span class="journey-date">Sep 2024 – Present</span><div><h3 class="journey-role">Undergraduate</h3><div class="journey-affiliation"><a href="https://cs.qhu.edu.cn/" rel="noopener noreferrer" target="_blank">Qinghai University</a></div><div class="journey-desc">College of Computer Science, supervised by Dr. <a href="https://zhengjun-du.github.io/" rel="noopener noreferrer" target="_blank">Zhengjun Du</a> and Dr. <a href="https://cs.qhu.edu.cn/jxgz/jxysz/szgk/8d633e91842f475cb382f89f82409529.htm" rel="noopener noreferrer" target="_blank">Song Wang</a>.</div></div></div>
 </div>
+</section>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const sections = document.querySelectorAll("section");
-        const navLinks = document.querySelectorAll(".top-nav .nav-link");
+      <section id="academic-services" class="reveal">
+        <div class="section-heading"><span class="section-icon">07</span><h2 class="section-title">Academic Service</h2><span class="section-line"></span></div>
+        <div class="service-card"><span class="badge ghost">Reviewer</span> &nbsp; ACM International Conference on Multimedia (<strong>ACM MM 2026</strong>)</div>
+      </section>
+    </main>
+  </div>
 
-        window.addEventListener("scroll", () => {
-            let current = "homepage"; // 默认在顶部时为 homepage
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (scrollY >= (sectionTop - 120)) { 
-                    current = section.getAttribute("id");
-                }
-            });
+  <footer class="footer"><div class="footer-inner"><div><div class="footer-signature">Guozhen Gao <span style="color:var(--aqua)">✳</span></div><div class="footer-update">Last updated: <strong><time datetime="2026-10-10" id="last-updated">October 10, 2026</time></strong> · Built with curiosity.</div></div><a href="#top" class="back-top">Back to top ↑</a></div></footer>
 
-            // 当滚动条到达页面最底部时，强制点亮最后一个 tab
-            if ((window.innerHeight + Math.round(window.scrollY)) >= document.body.offsetHeight - 10) {
-                current = "experience";
-            }
+  <script>
+    (() => {
+      'use strict';
+      // Change this single value when you actually update the website content.
+      // Do not use today's date: visiting the page is not an edit.
+      const LAST_UPDATED = '2026-10-10';
+      const updated = document.getElementById('last-updated');
+      updated.dateTime = LAST_UPDATED;
+      updated.textContent = new Date(`${LAST_UPDATED}T12:00:00Z`).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'});
 
-            navLinks.forEach(link => {
-                link.classList.remove("active");
-                if (link.getAttribute("href").includes(current)) {
-                    link.classList.add("active");
-                }
-            });
+      const filters = [...document.querySelectorAll('.filter-btn')];
+      const projects = [...document.querySelectorAll('.project-card')];
+      filters.forEach(btn => btn.addEventListener('click',()=>{
+        const chosen=btn.dataset.filter;
+        filters.forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));
+        projects.forEach(card=>{card.hidden=chosen!=='all' && !card.dataset.category.split(' ').includes(chosen);});
+      }));
+
+      const progress=document.getElementById('read-progress');
+      const navLinks=[...document.querySelectorAll('.nav-link')];
+      const sections=[...document.querySelectorAll('main section[id]')];
+      let scheduled=false;
+      function onScroll(){
+        if(scheduled)return;scheduled=true;
+        requestAnimationFrame(()=>{
+          const maxScroll=document.documentElement.scrollHeight-window.innerHeight;
+          progress.style.transform=`scaleX(${maxScroll>0?Math.max(0,Math.min(1,window.scrollY/maxScroll)):1})`;
+          let active='top';
+          for(const section of sections) if(section.getBoundingClientRect().top <= 140) active=section.id;
+          if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-5)active=sections.at(-1)?.id;
+          navLinks.forEach(link=>{const current=link.getAttribute('href')===`#${active}`;link.classList.toggle('active',current);if(current)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');});
+          scheduled=false;
         });
-    });
-</script>
+      }
+      window.addEventListener('scroll',onScroll,{passive:true});onScroll();
 
+      if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+        const targets=[...document.querySelectorAll('.reveal')];
+        const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}}),{threshold:.05,rootMargin:'0px 0px 40px 0px'});
+        targets.forEach(target=>observer.observe(target));
+        document.body.classList.add('js-reveal');
+      }
+
+    })();
+  </script>
 </body>
 </html>
